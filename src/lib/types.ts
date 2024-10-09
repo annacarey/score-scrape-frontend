@@ -1,34 +1,26 @@
 // src/lib/types.ts
 
 export interface ConversionResult {
-    markdown: string;
-  }
+  markdown: string;
+}
 
-  export type ConversionState = ConversionResult &{
-    isLoading: boolean;
-    isError: boolean;
-  }
-  
-  
+export type ConversionState = {
+  pdfBytes: string | null;
+  isLoading: boolean;
+  isError: boolean;
+};
+
 export interface AcceptResponse {
-    call_id: string;
+  call_id: string;
 }
 
 export interface PollResponse {
-    status:
-        | "processing"
-        | "completed";
-    result?: ConversionResult;
+  status: "processing" | "completed";
+  result?: ConversionResult;
 }
 
-export type ConversionStatus =
-
-    | "idle"
-    | "processing"
-    | "completed"
-    | "error";
+export type ConversionStatus = "idle" | "processing" | "completed" | "error";
 
 export interface VideoRequest {
-    video: File;
+  video: File;
 }
-  
