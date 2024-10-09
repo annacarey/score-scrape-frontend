@@ -2,6 +2,9 @@
   import type { ConversionState } from "$lib/types";
   import { convertVideoToMarkdown } from "$lib/utils/api";
   import Dropzone from "svelte-file-dropzone";
+  import VectorSvg from "$lib/assets/Vector.svg";
+  import Group from "$lib/assets/Group.png";
+  import Download from "$lib/assets/Download.png";
 
   let file: File | null = null;
   let conversionState: ConversionState = {
@@ -58,20 +61,37 @@
 </script>
 
 <div
-  class="flex bg-black/10 flex-col items-center justify-center w-full min-h-screen bg-gray-100"
+  class="flex bg-[#DCDEE9] flex-col items-center justify-center w-full min-h-screen bg-gray-100 gap-4"
 >
-  <h1 class="text-4xl font-bold text-blue-600 mb-4">Welcome to ScoreScrape!</h1>
-  <p>Download sheet music from YouTube videos</p>
-  <div>
-    <Dropzone multiple={false} on:drop={handleFileSelect}>
-      <p>Upload an MP4</p></Dropzone
-    >
+  <div class="flex gap-2 items-center">
+    <h1 class="text-[110px] text-blue-600 leading-none">ScoreScraper</h1>
+    <img src={VectorSvg} alt="Vector" />
   </div>
-  <button
-    on:click={handleDownload}
-    disabled={!conversionState.pdfBytes}
-    class="bg-blue-500 text-white px-4 py-2 rounded-md"
-  >
-    Download
-  </button>
+  <p class="text-[#0D42FFB2] text-[28px]">
+    Download sheet music from YouTube videos
+  </p>
+  <div class="flex gap-4 mt-4">
+    <button
+      class="bg-[#406AFF] text-[#DCDEE9] text-[32px] px-5 py-3 rounded-md font-normal"
+    >
+      <Dropzone
+        disableDefaultStyles
+        multiple={false}
+        on:drop={handleFileSelect}
+      >
+        <p>Upload MP4</p></Dropzone
+      >
+    </button>
+    <button
+      on:click={handleDownload}
+      disabled={!conversionState.pdfBytes}
+      class="bg-blue-500 text-[#406AFF66] px-5 py-3 rounded-md text-[32px] border-2 border-[#406AFF66] bg-[#DCDEE9] flex gap-1 items-center"
+    >
+      <p>Download</p>
+      <img src={Download} alt="Download" />
+    </button>
+  </div>
+  <div class="absolute right-0">
+    <img class="lg:w-[700px] w-[400px]" src={Group} alt="" />
+  </div>
 </div>
