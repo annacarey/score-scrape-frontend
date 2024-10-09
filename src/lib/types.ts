@@ -1,0 +1,34 @@
+// src/lib/types.ts
+
+export interface ConversionResult {
+    markdown: string;
+  }
+
+  export type ConversionState = ConversionResult &{
+    isLoading: boolean;
+    isError: boolean;
+  }
+  
+  
+export interface AcceptResponse {
+    call_id: string;
+}
+
+export interface PollResponse {
+    status:
+        | "processing"
+        | "completed";
+    result?: ConversionResult;
+}
+
+export type ConversionStatus =
+
+    | "idle"
+    | "processing"
+    | "completed"
+    | "error";
+
+export interface VideoRequest {
+    video: File;
+}
+  
