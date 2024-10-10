@@ -5,6 +5,7 @@
   import VectorSvg from "$lib/assets/Vector.svg";
   import Group from "$lib/assets/Group.png";
   import Download from "$lib/assets/Download.png";
+  import Button from "$lib/components/Button.svelte";
 
   let file: File | null = null;
   let conversionState: ConversionState = {
@@ -21,10 +22,8 @@
 
     try {
       conversionState.pdfBytes = await convertVideoToMarkdown(file);
-      console.log("conversionState.pdfBytes", conversionState.pdfBytes);
       conversionState.isLoading = false;
     } catch (error) {
-      console.error("error", error);
       conversionState.isError = true;
     }
   };
@@ -61,37 +60,66 @@
 </script>
 
 <div
-  class="flex bg-[#DCDEE9] flex-col items-center justify-center w-full min-h-screen bg-gray-100 gap-4"
+  class="flex bg-[#DCDEE9] flex-col items-center justify-center w-full min-h-screen bg-gray-100 gap-2"
 >
+  {#if conversionState.isLoading}
+    <img
+      src={VectorSvg}
+      alt="Vector"
+      class="vector-image vector-image-animated"
+    />
+  {:else}
+    <img src={VectorSvg} alt="Vector" class="vector-image" />
+  {/if}
   <div class="flex gap-2 items-center">
-    <h1 class="text-[110px] text-blue-600 leading-none">ScoreScraper</h1>
-    <img src={VectorSvg} alt="Vector" />
+    <h1 class="lg:text-[140px] text-[110px] text-blue-600 leading-none">
+      ScoreScraper
+    </h1>
   </div>
   <p class="text-[#0D42FFB2] text-[28px]">
     Download sheet music from YouTube videos
   </p>
   <div class="flex gap-4 mt-4">
-    <button
-      class="bg-[#406AFF] text-[#DCDEE9] text-[32px] px-5 py-3 rounded-md font-normal"
-    >
+    <Button isDisabled={conversionState.isLoading}>
       <Dropzone
+        class={conversionState.isLoading ? "cursor-not-allowed" : ""}
         disableDefaultStyles
         multiple={false}
         on:drop={handleFileSelect}
       >
         <p>Upload MP4</p></Dropzone
       >
-    </button>
-    <button
-      on:click={handleDownload}
-      disabled={!conversionState.pdfBytes}
-      class="bg-blue-500 text-[#406AFF66] px-5 py-3 rounded-md text-[32px] border-2 border-[#406AFF66] bg-[#DCDEE9] flex gap-1 items-center"
-    >
+    </Button>
+    <Button on:click={handleDownload} isDisabled={!conversionState.pdfBytes}>
       <p>Download</p>
       <img src={Download} alt="Download" />
-    </button>
+    </Button>
   </div>
-  <div class="absolute right-0">
+  {#if conversionState.isError}
+    <p class="text-red-500">There was an error. Please try again</p>
+  {/if}
+  <div class="absolute right-0 z-index--1">
     <img class="lg:w-[700px] w-[400px]" src={Group} alt="" />
   </div>
 </div>
+
+<style>
+  .vector-image {
+    position: absolute;
+    top: calc(50% - 220px);
+    left: 50%;
+  }
+  .vector-image-animated {
+    transform: translate(-50%, -50%);
+    animation: spin 1s ease-in-out infinite;
+  }
+
+  @keyframes spin {
+    from {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+</style>
