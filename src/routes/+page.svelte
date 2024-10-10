@@ -77,7 +77,7 @@
     </h1>
   </div>
   <p class="text-[#0D42FFB2] text-[28px]">
-    Download sheet music from YouTube videos
+    Download sheet music from video files
   </p>
   <div class="flex gap-4 mt-4">
     <Button isDisabled={conversionState.isLoading}>
@@ -87,7 +87,7 @@
         multiple={false}
         on:drop={handleFileSelect}
       >
-        <p>Upload MP4</p></Dropzone
+        <p>Upload video</p></Dropzone
       >
     </Button>
     <Button on:click={handleDownload} isDisabled={!conversionState.pdfBytes}>
