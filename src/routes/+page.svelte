@@ -90,14 +90,10 @@
         <p>Upload video</p></Dropzone
       >
     </Button>
-    <button
-      class="flex gap-2 items-center justify-center bg-[#406AFF] text-[#DCDEE9] text-[32px] px-5 py-3 rounded-md disabled:bg-[#DCDEE9] disabled:text-[#406AFF] disabled:border-2 disabled:border-[#406AFF] disabled:cursor-not-allowed"
-      on:click={handleDownload}
-      disabled={!conversionState.pdfBytes}
-    >
+    <Button onClick={handleDownload} isDisabled={!conversionState.pdfBytes}>
       <p>Download</p>
       <img src={Download} alt="Download" />
-    </button>
+    </Button>
   </div>
   {#if conversionState.isError}
     <p class="text-red-500">There was an error. Please try again</p>
