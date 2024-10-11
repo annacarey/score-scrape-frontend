@@ -1,7 +1,7 @@
 // src/lib/types.ts
 
 export interface ConversionResult {
-  markdown: string;
+  pdfBytes: string;
 }
 
 export type ConversionState = {
