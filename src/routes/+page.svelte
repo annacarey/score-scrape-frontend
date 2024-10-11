@@ -2,8 +2,8 @@
   import type { ConversionState } from "$lib/types";
   import { convertVideoToMarkdown } from "$lib/utils/api";
   import Dropzone from "svelte-file-dropzone";
-  import VectorSvg from "$lib/assets/Vector.svg";
-  import Group from "$lib/assets/Group.png";
+  import MusicalNoteSmall from "$lib/assets/MusicalNoteSmall.svg";
+  import MusicalNoteLarge from "$lib/assets/MusicalNoteLarge.png";
   import Download from "$lib/assets/Download.png";
   import Button from "$lib/components/Button.svelte";
 
@@ -64,12 +64,12 @@
 >
   {#if conversionState.isLoading}
     <img
-      src={VectorSvg}
-      alt="Vector"
+      src={MusicalNoteSmall}
+      alt="Musical note small"
       class="vector-image vector-image-animated"
     />
   {:else}
-    <img src={VectorSvg} alt="Vector" class="vector-image" />
+    <img src={MusicalNoteSmall} alt="Musical note small" class="vector-image" />
   {/if}
   <div class="flex gap-2 items-center">
     <h1 class="lg:text-[140px] text-[110px] text-blue-600 leading-none">
@@ -99,17 +99,17 @@
     <p class="text-red-500">There was an error. Please try again</p>
   {/if}
   <div class="absolute right-0 z-index--1">
-    <img class="lg:w-[700px] w-[400px]" src={Group} alt="" />
+    <img class="lg:w-[700px] w-[400px]" src={MusicalNoteLarge} alt="" />
   </div>
 </div>
 
 <style>
-  .vector-image {
+  .logo {
     position: absolute;
     top: calc(50% - 220px);
     left: 50%;
   }
-  .vector-image-animated {
+  .logo-animated {
     transform: translate(-50%, -50%);
     animation: spin 1s ease-in-out infinite;
   }

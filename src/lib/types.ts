@@ -18,9 +18,3 @@ export interface PollResponse {
   status: "processing" | "completed";
   result?: ConversionResult;
 }
-
-export type ConversionStatus = "idle" | "processing" | "completed" | "error";
-
-export interface VideoRequest {
-  video: File;
-}

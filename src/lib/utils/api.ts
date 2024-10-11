@@ -1,4 +1,4 @@
-import type { ConversionResult, AcceptResponse, PollResponse } from "../types";
+import type { ConversionResult, PollResponse } from "../types";
 
 const API_BASE_URL =
   "https://annacarey--score-scrape-fastapi-app-dev.modal.run";
@@ -37,9 +37,7 @@ export async function convertVideoToMarkdown(videoFile: File): Promise<string> {
   while (true) {
     const pollResponse = await pollResult(callId);
     if (pollResponse.status === "completed" && pollResponse.result) {
-      console.log("polling response", pollResponse);
       const result = atob(pollResponse.result.markdown);
-      console.log("result", result);
       return result;
     }
     // Wait for 5 seconds before polling again
